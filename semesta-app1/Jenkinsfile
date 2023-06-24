@@ -17,7 +17,7 @@ pipeline {
            
             stage('Build Docker Image') {
                     steps {
-                            sh 'whoami'
+                            sh 'pwd'
                             script {
                                     myimage = docker.build("unvizy/s-app1:${env.BUILD_ID}")
                             }
