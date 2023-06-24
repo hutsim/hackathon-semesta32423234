@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: semesta-app2
+  namespace: semesta
+  labels:
+    name: semesta-app2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: semesta-app2
+  template:
+    metadata:
+      name: semesta-app2
+      labels:
+        name: semesta-app2
+    spec:
+      containers:
+        - name: semesta-app2
+          image: unvizy/s-app2:tagversion
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"

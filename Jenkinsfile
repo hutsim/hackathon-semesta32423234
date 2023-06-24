@@ -83,11 +83,26 @@ pipeline {
         stage("Deploy semesta-app1 to K8s") {
                 steps{
                         echo "Deployment started ..."
-                        sh "ls -ltr"
-                        sh "pwd"
-                        sh "sed -i 's/tagversion/v${env.BUILD_ID}/g' semesta-app1/deployment.yaml"
-                        echo "Start deployment of deployment.yaml"
-                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "semesta-app1/deployment.yaml", credentialsId: env.CREDENTIALS_ID])
+
+                        echo "create semesta namespace"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/namespace.yaml", credentialsId: env.CREDENTIALS_ID])
+ 
+                        echo "create deployment"
+                        sh "sed -i 's/tagversion/v${env.BUILD_ID}/g' kubernetes/deploy-app1/deployment.yaml"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/deployment.yaml", credentialsId: env.CREDENTIALS_ID])
+
+                        echo "create horizontal pod autoscaling"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/hpa.yaml", credentialsId: env.CREDENTIALS_ID])
+
+                        echo "create service"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/service.yaml", credentialsId: env.CREDENTIALS_ID])
+
+                        echo "create certificate"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/managedCertificate.yaml", credentialsId: env.CREDENTIALS_ID])
+
+                        echo "create ingress"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/ingress.yaml", credentialsId: env.CREDENTIALS_ID])
+ 
                         echo "Deployment Finished ..."
                 }
         }
@@ -96,11 +111,24 @@ pipeline {
         stage("Deploy semesta-app2 to K8s") {
                 steps{
                         echo "Deployment started ..."
-                        sh "ls -ltr"
-                        sh "pwd"
-                        sh "sed -i 's/tagversion/v${env.BUILD_ID}/g' semesta-app2/deployment.yaml"
-                        echo "Start deployment of deployment.yaml"
-                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "semesta-app2/deployment.yaml", credentialsId: env.CREDENTIALS_ID])
+                        
+
+                        echo "create deployment"
+                        sh "sed -i 's/tagversion/v${env.BUILD_ID}/g' kubernetes/deploy-app2/deployment.yaml"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/deployment.yaml", credentialsId: env.CREDENTIALS_ID])
+
+                        echo "create horizontal pod autoscaling"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app2/hpa.yaml", credentialsId: env.CREDENTIALS_ID])
+
+                        echo "create service"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/service.yaml", credentialsId: env.CREDENTIALS_ID])
+
+                        echo "create certificate"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/managedCertificate.yaml", credentialsId: env.CREDENTIALS_ID])
+
+                        echo "create ingress"
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/ingress.yaml", credentialsId: env.CREDENTIALS_ID])
+ 
                         echo "Deployment Finished ..."
                 }
         }

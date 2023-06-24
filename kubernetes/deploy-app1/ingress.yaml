@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: semesta-ingress
+  namespace: semesta
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: semesta-ip
+    kubernetes.io/ingress.allow-http: "false"
+    networking.gke.io/managed-certificates: unvizy-ssl
+  labels:
+    name: semesta-ingress
+spec:
+  rules:
+  - host: semesta.unvizy.xyz
+    http:
+      paths:
+      - path: "/*"
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: semesta-app1-service
+            port: 
+              number: 80
