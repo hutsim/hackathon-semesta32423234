@@ -59,7 +59,7 @@ pipeline {
                                 withCredentials([string(credentialsId: "dockerhub", variable: "dockerhub")]) {
                                 sh "docker login -u unvizy -p ${dockerhub}"
                                 }
-                                def imageName = "unvizy/s-app1:v${env.BUILD_ID}"
+                                def imageName = "unvizy/semesta-app1:v${env.BUILD_ID}"
                                 docker.image(imageName).push()
                         }
                 }
@@ -72,7 +72,7 @@ pipeline {
                                 withCredentials([string(credentialsId: "dockerhub", variable: "dockerhub")]) {
                                 sh "docker login -u unvizy -p ${dockerhub}"
                                 }
-                                def imageName = "unvizy/s-app2:v${env.BUILD_ID}"
+                                def imageName = "unvizy/semesta-app2:v${env.BUILD_ID}"
                                 docker.image(imageName).push()
 
                                 
