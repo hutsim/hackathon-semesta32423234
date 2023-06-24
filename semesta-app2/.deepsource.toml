@@ -1,0 +1,14 @@
+version = 1
+
+[[analyzers]]
+name = "go"
+
+  [analyzers.meta]
+  import_root = "github.com/islamyakin/semesta-app2"
+
+[[transformers]]
+name = "gofmt"
+
+[[transformers]]
+name = "gofumpt"
+  import_root = "github.com/islamyakin/semesta-app2"
