@@ -37,8 +37,8 @@ pipeline {
         stage("Build Docker Image semesta-app1") {
                 steps {
                         script {
-                                def imageName = "unvizy/s-app1:v${env.BUILD_ID}"
-                                docker.build(imageName, "-f semesta-app1/Dockerfile .")
+                                def imageName = "unvizy/semesta-app1:v${env.BUILD_ID}"
+                                docker.build(imageName, "-f docker/app1/Dockerfile .")
                         }
                 }
         }
@@ -46,8 +46,8 @@ pipeline {
         stage("Build Docker Image semesta-app2") {
                 steps {
                         script {
-                                def imageName = "unvizy/s-app2:v${env.BUILD_ID}"
-                                docker.build(imageName, "-f semesta-app2/Dockerfile .")
+                                def imageName = "unvizy/semesta-app2:v${env.BUILD_ID}"
+                                docker.build(imageName, "-f docker/app2/Dockerfile .")
                         }
                 }
         }
@@ -112,7 +112,6 @@ pipeline {
                 steps{
                         echo "Deployment started ..."
                         
-
                         echo "create deployment"
                         sh "sed -i 's/tagversion/v${env.BUILD_ID}/g' kubernetes/deploy-app2/deployment.yaml"
                         step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/deployment.yaml", credentialsId: env.CREDENTIALS_ID])
@@ -121,14 +120,8 @@ pipeline {
                         step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app2/hpa.yaml", credentialsId: env.CREDENTIALS_ID])
 
                         echo "create service"
-                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/service.yaml", credentialsId: env.CREDENTIALS_ID])
+                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app2/service.yaml", credentialsId: env.CREDENTIALS_ID])
 
-                        echo "create certificate"
-                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/managedCertificate.yaml", credentialsId: env.CREDENTIALS_ID])
-
-                        echo "create ingress"
-                        step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "kubernetes/deploy-app1/ingress.yaml", credentialsId: env.CREDENTIALS_ID])
- 
                         echo "Deployment Finished ..."
                 }
         }

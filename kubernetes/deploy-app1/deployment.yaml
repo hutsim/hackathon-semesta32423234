@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: semesta-app1
-          image: unvizy/s-app1:tagversion
+          image: unvizy/semesta-app1:tagversion
           ports:
             - containerPort: 3000
           resources:
