@@ -16,14 +16,14 @@ pipeline {
 
             stage("test semesta-app1"){
                 steps {
-                        sh "cd semesta-app1 && go mod init && go mod test"
+                        sh "cd semesta-app1 && go test"
 
                 }
             }
 
             stage("test semesta-app2"){
                 steps {
-                        sh "cd semesta-app1 && go mod init && go mod test"
+                        sh "cd semesta-app1 && go test"
 
                 }
             }
