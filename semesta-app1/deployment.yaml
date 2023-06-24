@@ -45,6 +45,18 @@ spec:
     - port: 80
       targetPort: 3000
 
+
+
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: unvizy-ssl
+  namespace: semesta
+spec:
+  domains:
+    - semesta.unvizy.xyz
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -70,12 +82,4 @@ spec:
             port: 
               number: 80
 
----
-apiVersion: networking.gke.io/v1
-kind: ManagedCertificate
-metadata:
-  name: unvizy-ssl
-  namespace: semesta
-spec:
-  domains:
-    - semesta.unvizy.xyz                       
+                       
