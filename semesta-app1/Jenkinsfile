@@ -19,7 +19,7 @@ pipeline {
                     steps {
                             sh 'pwd'
                             script {
-                                    myimage = docker.build("unvizy/s-app1:${env.BUILD_ID}" "--file semesta-app1/Dockerfile .")
+                                    myimage = docker.build("unvizy/s-app1:${env.BUILD_ID}" "--build-arg DOCKERFILE_PATH=semesta-app1 .")
                             }
                     }
             }
