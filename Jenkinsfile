@@ -99,7 +99,7 @@ pipeline {
                             echo "Deployment started ..."
                             sh "ls -ltr"
                             sh "pwd"
-                            sh "sed -i "s/tagversion/${env.BUILD_ID}/g" semesta-app2/deployment.yaml"
+                            sh "sed -i 's/tagversion/${env.BUILD_ID}/g' semesta-app2/deployment.yaml"
                             echo "Start deployment of deployment.yaml"
                             step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "semesta-app2/deployment.yaml", credentialsId: env.CREDENTIALS_ID])
                             echo "Deployment Finished ..."
