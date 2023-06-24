@@ -1,4 +1,4 @@
-Dockerfile.multistage
+deployment.yaml
 .git/
 .gitignore
 README.md
