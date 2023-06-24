@@ -1,9 +1,9 @@
 FROM golang:latest as build
 
 WORKDIR /app
-COPY go.mod ./
+COPY semesta-app2/go.mod ./
 RUN go mod download
-COPY . .
+COPY semesta-app2/* .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
 
