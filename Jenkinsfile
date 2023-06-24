@@ -32,7 +32,7 @@ pipeline {
             stage("Build Docker Image semesta-app1") {
                     steps {
                             script {
-                                 def imageName = "unvizy/s-app1:${env.BUILD_ID}"
+                                 def imageName = "unvizy/s-app1:v${env.BUILD_ID}"
                                  docker.build(imageName, "-f semesta-app1/Dockerfile .")
                             }
                     }
@@ -41,7 +41,7 @@ pipeline {
             stage("Build Docker Image semesta-app2") {
                     steps {
                             script {
-                                 def imageName = "unvizy/s-app2:${env.BUILD_ID}"
+                                 def imageName = "unvizy/s-app2:v${env.BUILD_ID}"
                                  docker.build(imageName, "-f semesta-app2/Dockerfile .")
                             }
                     }
@@ -54,7 +54,7 @@ pipeline {
                                     withCredentials([string(credentialsId: "dockerhub", variable: "dockerhub")]) {
                                         sh "docker login -u unvizy -p ${dockerhub}"
                                     }
-                                    def imageName = "unvizy/s-app1:${env.BUILD_ID}"
+                                    def imageName = "unvizy/s-app1:v${env.BUILD_ID}"
                                         docker.image(imageName).push()
 
                                     
@@ -69,7 +69,7 @@ pipeline {
                                     withCredentials([string(credentialsId: "dockerhub", variable: "dockerhub")]) {
                                         sh "docker login -u unvizy -p ${dockerhub}"
                                     }
-                                    def imageName = "unvizy/s-app2:${env.BUILD_ID}"
+                                    def imageName = "unvizy/s-app2:v${env.BUILD_ID}"
                                         docker.image(imageName).push()
 
                                     
@@ -82,7 +82,7 @@ pipeline {
                             echo "Deployment started ..."
                             sh "ls -ltr"
                             sh "pwd"
-                            sh "sed -i 's/tagversion/${env.BUILD_ID}/g' semesta-app1/deployment.yaml"
+                            sh "sed -i 's/tagversion/v${env.BUILD_ID}/g' semesta-app1/deployment.yaml"
                             echo "Start deployment of deployment.yaml"
                             step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "semesta-app1/deployment.yaml", credentialsId: env.CREDENTIALS_ID])
                             echo "Deployment Finished ..."
@@ -95,7 +95,7 @@ pipeline {
                             echo "Deployment started ..."
                             sh "ls -ltr"
                             sh "pwd"
-                            sh "sed -i 's/tagversion/${env.BUILD_ID}/g' semesta-app2/deployment.yaml"
+                            sh "sed -i 's/tagversion/v${env.BUILD_ID}/g' semesta-app2/deployment.yaml"
                             echo "Start deployment of deployment.yaml"
                             step([$class: "KubernetesEngineBuilder", projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: "semesta-app2/deployment.yaml", credentialsId: env.CREDENTIALS_ID])
                             echo "Deployment Finished ..."
