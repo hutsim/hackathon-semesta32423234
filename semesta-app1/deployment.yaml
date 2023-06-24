@@ -64,9 +64,9 @@ metadata:
   name: semesta-ingress
   namespace: semesta
   annotations:
-  kubernetes.io/ingress.global-static-ip-name: semesta-ip
-  kubernetes.io/ingress.allow-http: "false"
-  networking.gke.io/managed-certificates: unvizy-ssl
+    kubernetes.io/ingress.global-static-ip-name: semesta-ip
+    kubernetes.io/ingress.allow-http: "false"
+    networking.gke.io/managed-certificates: unvizy-ssl
   labels:
     name: semesta-ingress
 spec:
