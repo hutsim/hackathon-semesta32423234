@@ -18,7 +18,8 @@ pipeline {
             stage('Build Docker Image') {
                     steps {
                             script {
-                                    myimage = docker.build("unvizy/s-app1:${env.BUILD_ID}" "-f semesta-app1/Dockerfile .")
+                                 def imageName = "unvizy/s-app1:${env.BUILD_ID}"
+                                 docker.build(imageName, "-f semesta-app1/Dockerfile .")
                             }
                     }
             }
