@@ -43,6 +43,17 @@
   #   debug:
   #     var: output
 
+  - name: Install basic requirements
+    apt:
+      name: "{{item}}"
+      state: present
+    loop:
+      - tzdata
+      - ntpdate
+  
+  - name: set timezone
+    community.general.timezone:
+      name: Asia/Jakarta
 
   - name: add key repo jenkins
     apt_key:
@@ -79,4 +90,9 @@
   - name: restart jenkins service
     service:
       name: jenkins
+      state: restarted
+  
+  - name: install go
+    apt: 
+      name: golang-go
       state: present
