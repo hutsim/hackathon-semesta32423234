@@ -20,7 +20,7 @@ pipeline {
                             sh 'cd semesta-app1'
                             sh 'pwd'
                             script {
-                                    myimage = docker.build("unvizy/s-app1:${env.BUILD_ID}")
+                                    myimage = docker.build("unvizy/s-app1:${env.BUILD_ID}" "./semesta-app1")
                             }
                     }
             }
