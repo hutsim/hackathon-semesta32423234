@@ -74,8 +74,8 @@ spec:
   - host: semesta.unvizy.xyz
     http:
       paths:
-      - pathType: Prefix
-        path: "/"
+      - path: "/*"
+        pathType: ImplementationSpecific
         backend:
           service:
             name: semesta-app1-service
