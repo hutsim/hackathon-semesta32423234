@@ -23,7 +23,7 @@ pipeline {
 
             stage("test semesta-app2"){
                 steps {
-                        sh "cd semesta-app1 && go test"
+                        sh "cd semesta-app2 && go test"
 
                 }
             }
