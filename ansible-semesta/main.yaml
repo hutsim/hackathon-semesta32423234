@@ -1,0 +1,82 @@
+---
+- name: Install requirements for jenkins
+  hosts: semesta-instance
+  become: true
+  tasks:
+  
+  - name: add Docker GPG apt key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: add debian repo Docker
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu jammy stable
+      state: present
+  
+  - name: update and install docker-ce and docker-compose
+    apt:
+      name: "{{item}}"
+      state: latest
+      update_cache: yes
+    loop:
+      - docker-ce
+      - docker-compose
+
+  # - name: copy directory jenkins
+  #   copy:
+  #     src: jenkins
+  #     dest: "/home/unvizy"
+
+
+  # - name: remove existing container jenkins
+  #   community.docker.docker_compose:
+  #     project_src: /home/unvizy/jenkins
+  #     state: absent
+
+  # - name: running jenkins using docker-compose
+  #   community.docker.docker_compose:
+  #     project_src: /home/unvizy/jenkins
+  #   register: output
+
+  # - name: show result
+  #   debug:
+  #     var: output
+
+
+  - name: add key repo jenkins
+    apt_key:
+      url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key 
+      state: present
+
+  - name: add deb repo jenkins
+    apt_repository: 
+      repo: "deb https://pkg.jenkins.io/debian-stable binary/"
+      state: present
+      
+
+  - name: install jenkins and java
+    apt:
+      name: "{{item}}"
+      state: latest
+      update_cache: yes
+    loop:
+      - openjdk-11-jdk-headless
+      - jenkins
+
+  - name: install kubectl
+    community.general.snap:
+      name: kubectl
+      state: present
+      classic: yes
+      channel: stable
+
+  - name: add group docker to jenkins
+    user:
+      name: jenkins
+      group: docker
+  
+  - name: restart jenkins service
+    service:
+      name: jenkins
+      state: present

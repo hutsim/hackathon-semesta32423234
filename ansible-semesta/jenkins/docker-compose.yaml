@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  jenkins:
+    build:
+      dockerfile: ./Dockerfile
+      context: "."
+    image: unvizy/jenkins-semesta:v1
+    privileged: true
+    user: root
+    ports:
+      - 80:8080
+      - 50000:50000
+    container_name: jenkins-semesta
+    volumes:
+      - jenkins:/var/jenkins_home
+
+volumes:
+  jenkins:
+    driver: local
