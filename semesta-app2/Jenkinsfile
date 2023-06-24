@@ -15,7 +15,7 @@ pipeline {
             }
             
            
-            stage('Build Docker Image') {
+            stage('Build Docker Image semesta-app1') {
                     steps {
                             script {
                                  def imageName = "unvizy/s-app2:${env.BUILD_ID}"
