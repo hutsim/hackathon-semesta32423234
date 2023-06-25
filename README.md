@@ -69,3 +69,9 @@ HA pada Router1
 
 HA pada Router2
 ![Teks Alt](hsrp-router2.png)
+
+Etherchannel switch 1
+![Teks Alt](etherchannel-switch1.png)
+
+Etherchannel switch 2
+![Teks Alt](etherchannel-switch2.png)
