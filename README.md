@@ -48,3 +48,4 @@ Saya di sini menggunakan Google Kubernetes Engine (GKE)
 ![Teks Alt](k8scluster.png)
         
 ### Persipkan server Jenkins. 
+Server Jenkins dibangun menggunakan terraform, dan ansible
