@@ -30,3 +30,11 @@ Terdapat 2 tipe:
             * push docker image ke docker registry
             * deploy aplikasi ke kubernetes cluster
 
+Server Jenkins diinstall menggunakan Google Cloud Compute, proses provisioning server menggunakan Terraform dan untuk setup server nya menggunakan Ansible
+
+## Berikut tampilan hasil akses website nya:
+
+- Akses https://semesta.unvizy.xyz
+    ![Teks Alt](root.png)
+- Akses https://semesta.unvizy.xyz/aboutus
+    ![Teks Alt](aboutus.png)
