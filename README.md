@@ -5,7 +5,7 @@ Nama: Hary Miftah Fauzan
 Asal Sekolah: SMKN 2 Tasikmalaya
 
 ## 📝 Deskripsi Project
-Project ini dibangun 80 persen dibangun di lingkungan Google Cloud Provide (GCP), dengan topologi atau arsitektur sebagai berikut:
+Project ini dibangun 80 persen di lingkungan Google Cloud Provide (GCP), dengan topologi atau arsitektur sebagai berikut:
 
 ![Teks Alt](topo-hackathon.png)
 
@@ -32,9 +32,19 @@ Terdapat 2 tipe:
 
 Server Jenkins diinstall menggunakan Google Cloud Compute, proses provisioning server menggunakan Terraform dan untuk setup server nya menggunakan Ansible
 
-## Berikut tampilan hasil akses website nya:
+### Berikut tampilan hasil akses website nya:
 
 - Akses https://semesta.unvizy.xyz
     ![Teks Alt](root.png)
 - Akses https://semesta.unvizy.xyz/aboutus
     ![Teks Alt](aboutus.png)
+
+
+## 🚀 Cara Menggunakan Project
+### Kubernetes Cluster
+Buat terlebih dahulu kubernetes cluster nya.
+Saya di sini menggunakan Google Kubernetes Engine (GKE)
+        
+![Teks Alt](k8scluster.png)
+        
+### Persipkan server Jenkins. 
