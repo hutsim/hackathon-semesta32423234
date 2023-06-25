@@ -63,3 +63,9 @@ web.
 
 Akses PC1 ke Website:
 ![Teks Alt](aksesPC1keWeb.png)
+
+HA pada Router1
+![Teks Alt](hsrp-router1.png)
+
+HA pada Router2
+![Teks Alt](hsrp-router2.png)
