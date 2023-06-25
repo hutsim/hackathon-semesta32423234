@@ -50,5 +50,8 @@ Saya di sini menggunakan Google Kubernetes Engine (GKE)
 ### Persipkan server Jenkins. 
 Server Jenkins dibangun menggunakan terraform, dan ansible
 
+### Jenkins pipeline
+![Teks Alt](pipeline.png)
+
 ## 🌐 Deskripsi Project Cisco Packet Tracer
 Architectfure network dengan HA dan juga etherchannel. Tidak lupa access control list untuk melakukan filtering traffic
