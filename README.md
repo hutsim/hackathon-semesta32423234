@@ -54,4 +54,12 @@ Server Jenkins dibangun menggunakan terraform, dan ansible
 ![Teks Alt](pipeline.png)
 
 ## 🌐 Deskripsi Project Cisco Packet Tracer
-Architectfure network dengan HA dan juga etherchannel. Tidak lupa access control list untuk melakukan filtering traffic
+Architectfure network dengan HA dan juga etherchannel. Tidak lupa access control list untuk melakukan filtering traffic.
+Filtering traffic. digunakan agar PC2 tidak dapat mengakses website.
+![Teks Alt](aksesPC2keWeb.png)
+untuk ping, PC2 diizinkan melakukan ping ke server
+web.
+![Teks Alt](pingPC2AslikeServer.png)
+
+Akses PC1 ke Website:
+![Teks Alt](aksesPC1keWeb.png)
